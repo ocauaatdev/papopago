@@ -1,65 +1,69 @@
 package br.com.fiap;
 
-import br.com.fiap.exceptions.UsuarioNaoEncontradoException;
-import br.com.fiap.factory.ConnectionFactory;
+import br.com.fiap.view.CategoriaView;
+import br.com.fiap.view.TransacaoView;
+import br.com.fiap.view.UsuarioView;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        try{
-            Connection conexao = ConnectionFactory.getConnection();
-            System.out.println("Conexão realizada!");
-        }catch (SQLException e){
-            System.err.println(e.getMessage());
-        }
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
 
-//        System.out.println("__________                     __________                        \n" +
-//                "\\______   \\_____  ______   ____\\______   \\_____     ____   ____  \n" +
-//                " |     ___/\\__  \\ \\____ \\ /  _ \\|     ___/\\__  \\   / ___\\ /  _ \\ \n" +
-//                " |    |     / __ \\|  |_> >  <_> )    |     / __ \\_/ /_/  >  <_> )\n" +
-//                " |____|    (____  /   __/ \\____/|____|    (____  /\\___  / \\____/ \n" +
-//                "                \\/|__|                         \\//_____/         ");
-//
-//        System.out.println("===================================\n" +
-//                "SEJA BEM VINDO");
-//
-//        Scanner scanner = new Scanner(System.in);
-//        int opcao = -1;
-//
-//        System.out.println("Selecione uma opção:\n" +
-//                "1. Cadastrar Usuario\n" +
-//                "2. Registrar ganho\n" +
-//                "3. Registrar gasto\n" +
-//                "4. Registrar investimento\n" +
-//                "5. Criar nova meta\n" +
-//                "6. Cadastrar nova conta\n" +
-//                "7. Cadastrar Instituição Financeira\n");
-//
-//
-//        switch (opcao = scanner.nextInt()){
-//            case 1:
-//                System.out.println("opcao 1");
-//            case 2:
-//                System.out.println("opcao 2");
-//            case 3:
-//                System.out.println("opcao 3");
-//            case 4:
-//                System.out.println("opcao 4");
-//            case 5:
-//                System.out.println("opcao 5");
-//            case 6:
-//                System.out.println("opcao 6");
-//            case 7:
-//                System.out.println("opcao 7");
-//            default:
-//                System.out.println("Opção inválida!");
-//        }
-//
-//
-//        scanner.close();
+        do {
+            System.out.println(" ____                          ____                           \n" +
+                    "/\\  _`\\                       /\\  _`\\                         \n" +
+                    "\\ \\ \\L\\ \\ __     _____     ___\\ \\ \\L\\ \\ __       __     ___   \n" +
+                    " \\ \\ ,__/'__`\\  /\\ '__`\\  / __`\\ \\ ,__/'__`\\   /'_ `\\  / __`\\ \n" +
+                    "  \\ \\ \\/\\ \\L\\.\\_\\ \\ \\L\\ \\/\\ \\L\\ \\ \\ \\/\\ \\L\\.\\_/\\ \\L\\ \\/\\ \\L\\ \\\n" +
+                    "   \\ \\_\\ \\__/.\\_\\\\ \\ ,__/\\ \\____/\\ \\_\\ \\__/.\\_\\ \\____ \\ \\____/\n" +
+                    "    \\/_/\\/__/\\/_/ \\ \\ \\/  \\/___/  \\/_/\\/__/\\/_/\\/___L\\ \\/___/ \n" +
+                    "                   \\ \\_\\                         /\\____/      \n" +
+                    "                    \\/_/                         \\_/__/       ");
+
+            System.out.println("=================================");
+            System.out.println("BEM VINDO(A)\n" +
+                    "Selecione uma opção:\n" +
+                    "1. Opções de Usuário\n" +
+                    "2. Opções de Conta\n" +
+                    "3. Opções de Transação\n" +
+                    "4. Opções de Investimento\n" +
+                    "5. Opções de Meta\n" +
+                    "6. Opções de Instituição Financeira\n" +
+                    "7. Opções de Categoria\n" +
+                    "0. Sair");
+
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao){
+                case 1:
+                    new UsuarioView().menuUsuario();
+                    break;
+                case 2:
+                    //chama a view da Conta
+                case 3:
+                    new TransacaoView().menuTransacao();
+                    break;
+                case 4:
+                    //chama view de Investimento
+                case 5:
+                    //chama a view de Meta
+                case 6:
+                    //chama a view de Instituição Financeira
+                case 7:
+                    new CategoriaView().menuCategoria();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção Inválida!");
+            }
+        }while (opcao != 0);
+        scanner.close();
+
     }
 }

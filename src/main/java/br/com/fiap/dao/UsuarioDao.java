@@ -5,7 +5,10 @@ import br.com.fiap.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDao {
     private Connection conexao;
@@ -31,12 +34,27 @@ public class UsuarioDao {
 
     }
 
+    public List<Usuario> getAll() throws SQLException{
+        PreparedStatement stm = conexao.prepareStatement("SELECT * FROM T_PP_USUARIO");
+        ResultSet result = stm.executeQuery();
+        List<Usuario> lista = new ArrayList<>();
+
+        while (result.next()){
+            int id = result.getInt("id_usuario");
+            String nome = result.getString("nm_usuario");
+            String email = result.getString("eml_usuario");
+            String dtNascimento = result.getString("dt_nascimento");
+            String telefone = result.getString("nr_telefone");
+            String senha = result.getString("sen_senha");
+            String cpf = result.getString("nr_cpf");
+
+            lista.add(new Usuario(id, nome, email, dtNascimento, telefone, senha, cpf));
+        }
+        return lista;
+    }
+
     //Fecha conexão com banco de dados
     public void fecharConexao() throws SQLException {
         conexao.close();
     }
-
-    //atualizar...
-    //deletar...
-    //listar...
 }
