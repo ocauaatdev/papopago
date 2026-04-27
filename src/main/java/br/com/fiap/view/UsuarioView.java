@@ -16,7 +16,7 @@ public class UsuarioView {
         int opcao;
 
         do {
-            System.out.println("=== Opções para Usuário ===\n" +
+            System.out.println("\n=== Opções para Usuário ===\n" +
                     "1. Cadastrar Usuário\n" +
                     "2. Listar Usuários\n" +
                     "0. Voltar");
@@ -30,6 +30,9 @@ public class UsuarioView {
                     break;
                 case 2:
                     listar();
+                    break;
+                case 0:
+                    System.out.println("Voltando...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -57,19 +60,21 @@ public class UsuarioView {
             System.out.println("Digite sua senha:");
             String senha = scanner.nextLine();
 
-            //Para não haver a necessidade do usuario inserir um Id manualmente, geramos um numero aleatorio de 0 a 100
-            Random random = new Random();
-            int id = random.nextInt(100);
-
         try {
             UsuarioDao dao = new UsuarioDao();
-            Usuario usuario = new Usuario(id, nome, email, dtNascimento, telefone, senha, cpf);
+            Usuario usuario = new Usuario();
+            usuario.setNome(nome);
+            usuario.setEmail(email);
+            usuario.setDataNascimento(dtNascimento);
+            usuario.setNumeroTelefone(telefone);
+            usuario.setCpf(cpf);
+            usuario.setSenha(senha);
             dao.cadastrar(usuario);
             dao.fecharConexao();
 
             System.out.println("Usuário Cadastrado!");
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -88,7 +93,7 @@ public class UsuarioView {
 
             dao.fecharConexao();
         }catch (SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 }

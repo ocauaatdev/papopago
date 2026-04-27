@@ -5,19 +5,21 @@ public class Investimento {
     private String ticker;
     private String tipo;
     private double valorpatrimonio;
-    private String dataVencimento;
+    private String dataResgate;
     private String origem; // MANUAL ou B3
+    private int idUsuario;
 
     public Investimento(){
     }
 
-    public Investimento(int id, String ticker, String tipo, double valorpatrimonio, String dataVencimento, String origem){
+    public Investimento(int id, String ticker, String tipo, double valorpatrimonio, String dataResgate, String origem, int idUsuario) {
         this.id = id;
-        this. ticker = ticker;
-        this.tipo= tipo;
+        this.ticker = ticker;
+        this.tipo = tipo;
         this.valorpatrimonio = valorpatrimonio;
-        this.dataVencimento = dataVencimento;
+        this.dataResgate = dataResgate;
         this.origem = origem;
+        this.idUsuario = idUsuario;
     }
 
     public void calcularRendimento(){
@@ -56,12 +58,12 @@ public class Investimento {
         this.valorpatrimonio = valorpatrimonio;
     }
 
-    public String getDataVencimento() {
-        return dataVencimento;
+    public String getDataResgate() {
+        return dataResgate;
     }
 
-    public void setDataVencimento(String dataVencimento) {
-        this.dataVencimento = dataVencimento;
+    public void setDataResgate(String dataResgate) {
+        this.dataResgate = dataResgate;
     }
 
     public String getOrigem() {
@@ -70,6 +72,14 @@ public class Investimento {
 
     public void setOrigem(String origem) {
         this.origem = origem;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
 

@@ -17,7 +17,7 @@ public class CategoriaView {
         int opcao;
 
         do {
-            System.out.println("=== Opções para Categoria ===\n" +
+            System.out.println("\n=== Opções para Categoria ===\n" +
                     "1. Cadastrar nova Categoria\n" +
                     "2. Listar Categorias\n" +
                     "0. Voltar");
@@ -33,7 +33,7 @@ public class CategoriaView {
                     listar();
                     break;
                 case 0:
-                    System.out.println("Saindo...");
+                    System.out.println("Voltando...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -42,15 +42,10 @@ public class CategoriaView {
     }
 
     public void cadastrar(){
-
-        //Para não haver a necessidade do usuario inserir um Id manualmente, geramos um numero aleatorio de 0 a 100
-        Random random = new Random();
-        int id = random.nextInt(100);
-
         System.out.println("Digite o nome da categoria:");
         String nome = scanner.nextLine();
 
-        System.out.println("Escolha o tipo da categoria:\n1. RECEITA\n2.DESPESA");
+        System.out.println("Escolha o tipo da categoria:\n1. RECEITA\n2. DESPESA");
         int escolha = scanner.nextInt();
         scanner.nextLine();
 
@@ -63,14 +58,16 @@ public class CategoriaView {
         }
 
         try {
-            Categoria categoria = new Categoria(id, nome, tipo);
+            Categoria categoria = new Categoria();
+            categoria.setNomeCategoria(nome);
+            categoria.setTipo(tipo);
             CategoriaDao dao = new CategoriaDao();
             dao.cadastrar(categoria);
             dao.fecharConexao();
 
             System.out.println("Categoria cadastrada com sucesso!");
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -85,7 +82,7 @@ public class CategoriaView {
 
             dao.fecharConexao();
         }catch (SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 }

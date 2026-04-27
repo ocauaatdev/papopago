@@ -1,8 +1,6 @@
 package br.com.fiap;
 
-import br.com.fiap.view.CategoriaView;
-import br.com.fiap.view.TransacaoView;
-import br.com.fiap.view.UsuarioView;
+import br.com.fiap.view.*;
 
 import java.util.Scanner;
 
@@ -43,16 +41,20 @@ public class Main {
                     new UsuarioView().menuUsuario();
                     break;
                 case 2:
-                    //chama a view da Conta
+                    new ContaView().menuConta();
+                    break;
                 case 3:
                     new TransacaoView().menuTransacao();
                     break;
                 case 4:
-                    //chama view de Investimento
+                    new InvestmentView().menuInvestimento();
+                    break;
                 case 5:
-                    //chama a view de Meta
+                    new MetaView().menuMeta();
+                    break;
                 case 6:
-                    //chama a view de Instituição Financeira
+                    new InstituicaoFinanceiraView().menuInstituicaoFinanceira();
+                    break;
                 case 7:
                     new CategoriaView().menuCategoria();
                     break;

@@ -20,7 +20,7 @@ public class TransacaoDao {
     }
 
     public void registrar(Transacao transacao) throws SQLException{
-        PreparedStatement stm = conexao.prepareStatement("INSERT INTO T_PP_TRANSACAO (id_transacao, ds_transacao, vl_transacao, dt_transacao, ds_origem, id_conta, id_categoria)" +
+        PreparedStatement stm = conexao.prepareStatement("INSERT INTO T_PP_TRANSACAO (id_transacao, ds_transacao, vl_transacao, dta_transacao, ds_origem, id_conta, id_categoria)" +
                 "VALUES(?,?,?,?,?,?,?)");
 
         stm.setInt(1, transacao.getId());
@@ -43,7 +43,7 @@ public class TransacaoDao {
             int id = result.getInt("id_transacao");
             String descricao = result.getString("ds_transacao");
             double valor = result.getDouble("vl_transacao");
-            String data = result.getString("dt_transacao");
+            String data = result.getString("dta_transacao");
             String origem = result.getString("ds_origem");
             int idConta = result.getInt("id_conta");
             int idCategoria = result.getInt("id_categoria");

@@ -3,7 +3,6 @@ package br.com.fiap.model;
 public class Conta {
     private int id;
     private String nomeConta;
-    private String tipo;
     private double saldo;
     private int id_usuario;
     private int id_inst_fin;
@@ -11,10 +10,9 @@ public class Conta {
     public Conta() {
 
     }
-    public Conta(int id, String nomeConta, String tipo, double saldo, int id_usuario, int id_inst_fin){
+    public Conta(int id, String nomeConta, double saldo, int id_usuario, int id_inst_fin){
         this.id =id;
         this.nomeConta =nomeConta;
-        this.tipo =tipo;
         this.saldo =saldo;
         this.id_usuario =id_usuario;
         this.id_inst_fin = id_inst_fin;
@@ -42,14 +40,6 @@ public class Conta {
 
     public void setNomeConta(String nomeConta) {
         this.nomeConta = nomeConta;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public double getSaldo() {

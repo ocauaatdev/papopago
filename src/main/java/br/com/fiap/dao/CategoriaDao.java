@@ -19,7 +19,7 @@ public class CategoriaDao {
     }
 
     public void cadastrar(Categoria categoria) throws SQLException{
-        PreparedStatement stm = conexao.prepareStatement("INSERT INTO T_PP_CATEGORIA (id_categoria, nm_categoria, ds_tipo)" +
+        PreparedStatement stm = conexao.prepareStatement("INSERT INTO T_PP_CATEGORIA (id_categoria, nm_categoria, ds_tipo_categoria)" +
                 "VALUES (?,?,?)");
 
         stm.setInt(1, categoria.getId());
@@ -53,7 +53,7 @@ public class CategoriaDao {
     private Categoria parseCategoria(ResultSet result) throws SQLException{
         int id = result.getInt("id_categoria");
         String nome = result.getString("nm_categoria");
-        String tipo = result.getString("ds_tipo");
+        String tipo = result.getString("ds_tipo_categoria");
 
         return new Categoria(id,nome,tipo);
     }

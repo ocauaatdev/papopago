@@ -19,7 +19,7 @@ public class TransacaoView {
         int opcao;
 
         do {
-            System.out.println("=== Opções para Transação ===\n" +
+            System.out.println("\n=== Opções para Transação ===\n" +
                     "1. Registrar nova transação\n" +
                     "2. Listar transações\n" +
                     "0. Voltar");
@@ -35,7 +35,7 @@ public class TransacaoView {
                     listar();
                     break;
                 case 0:
-                    System.out.println("Saindo...");
+                    System.out.println("Voltando...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -61,14 +61,11 @@ public class TransacaoView {
             }
             dao.fecharConexao();
         } catch (SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
     public void registrar() {
-        Random random = new Random();
-        int id = random.nextInt(100);
-
         System.out.println("Digite a descrição da transação:");
         String descricao = scanner.nextLine();
 
@@ -76,7 +73,7 @@ public class TransacaoView {
         double valor = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.println("Digite a data em que a transação foi feita:");
+        System.out.println("Digite a data em que a transação foi feita (DD/MM/AAAA):");
         String data = scanner.nextLine();
 
         String origem = "MANUAL";
@@ -107,20 +104,22 @@ public class TransacaoView {
 
             System.out.println("Categoria escolhida: " + categoria.getNomeCategoria());
 
-            Transacao transacao = new Transacao(id, descricao, valor, data, origem, idConta, idCategoria);
+            Transacao transacao = new Transacao();
+            transacao.setDescricao(descricao);
+            transacao.setValor(valor);
+            transacao.setData(data);
+            transacao.setOrigem(origem);
+            transacao.setId_conta(idConta);
+            transacao.setId_categoria(idCategoria);
             TransacaoDao dao = new TransacaoDao();
             dao.registrar(transacao);
             dao.fecharConexao();
             categoriaDao.fecharConexao();
             System.out.println("Transação registrada!");
-
-
-        } catch (SQLException e){
-            System.err.println(e.getMessage());
+        } catch (SQLException | EntidadeNaoEncontradaException e){
+            System.out.println("Erro: " + e.getMessage());
         }
-        catch (EntidadeNaoEncontradaException e){
-            System.err.println(e.getMessage());
-        }
+
 
     }
 }
